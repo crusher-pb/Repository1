@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity7 extends AppCompatActivity {
+public class MainActivity7 extends BaseActivity{
     EditText emailid,password;
     Button btnsignin;
     TextView tvsignup;
@@ -51,34 +52,8 @@ public class MainActivity7 extends AppCompatActivity {
         btnsignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email=emailid.getText().toString();
-                String pwd=password.getText().toString();
-                if (email.isEmpty() && pwd.isEmpty()){
-                    Toast.makeText(MainActivity7.this,"Fields are empty",Toast.LENGTH_SHORT).show();
-                }
-                else if (pwd.isEmpty()){
-                    password.setError("Please enter password");
-                    password.requestFocus();
-                }
-                else if (email.isEmpty()){
-                    emailid.setError("Please enter password");
-                    emailid.requestFocus();
-                }
-                else if (!(email.isEmpty()) && !(pwd.isEmpty())){
-                    mFirebaseAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(MainActivity7.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (!task.isSuccessful()){
-                                Toast.makeText(MainActivity7.this,"Login unsuccessful! Please try again",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                startActivity(new Intent(MainActivity7.this,MainActivity2.class));
-                            }
-                        }
-                    });
-                }
-                else{
-                    Toast.makeText(MainActivity7.this,"An error occurred! Please try again",Toast.LENGTH_SHORT).show();
+                if (validateForm()){
+                    signIn(emailid.getText().toString(),password.getText().toString());
                 }
             }
         });
@@ -91,6 +66,45 @@ public class MainActivity7 extends AppCompatActivity {
         });
     }
 
+    private boolean validateForm(){
+        boolean valid=true;
+        String email=emailid.getText().toString();
+        String pwd=password.getText().toString();
+        if (TextUtils.isEmpty(email)){
+            emailid.setError("Required");
+            valid=false;
+        }
+        else{
+            emailid.setError(null);
+        }
+        if(TextUtils.isEmpty(pwd)){
+            password.setError("Reuired");
+            valid=false;
+        }
+        else {
+            password.setError(null);
+        }
+        return valid;
+    }
+
+    private void signIn(String email,String pwd){
+        showProgressDialog();
+        View view=this.getCurrentFocus();
+        hideKeyboard(view);
+        mFirebaseAuth.signInWithEmailAndPassword(email,pwd)
+                .addOnCompleteListener(MainActivity7.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            startActivity(new Intent(MainActivity7.this,MainActivity2.class));
+                        }
+                        else{
+                            Toast.makeText(MainActivity7.this,"Login unsuccessful! Please try again",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        hideProgressDialog();
+    }
     @Override
     protected void onStart() {
         super.onStart();
