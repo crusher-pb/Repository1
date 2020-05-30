@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Weather Mate</string>
+    <string name="Weather_Mate">WEATHER MATE</string>
+    <string name="Button_name">Get Current Weather Data</string>
+    <string name="Lat_message">Enter the latitude</string>
+    <string name="Lon_message">Enter the longitude</string>
+    <string name="city_message">Enter te city name</string>
+</resources>
