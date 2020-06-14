@@ -3,6 +3,7 @@ package com.example.interiordesign;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -34,6 +34,8 @@ public class MainActivity2 extends AppCompatActivity{
         recyclerView.setLayoutManager(layoutManager);
         adapter=new RecyclerAdapter(images,this);
         recyclerView.setAdapter(adapter);
+        Toolbar toolbar=(Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
     }
 
     @Override

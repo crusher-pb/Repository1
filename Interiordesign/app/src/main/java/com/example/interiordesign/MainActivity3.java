@@ -3,19 +3,25 @@ package com.example.interiordesign;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
+import android.view.PixelCopy;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.assets.RenderableSource;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
@@ -34,17 +40,26 @@ import java.util.Calendar;
 
 public class MainActivity3 extends AppCompatActivity {
 
+    ArFragment arFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+
+        findViewById(R.id.savebtn1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePhoto();
+            }
+        });
 
         FirebaseApp.initializeApp(this);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference modelRef = storage.getReference().child("out.glb");
 
-        ArFragment arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment1);
+        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment1);
         findViewById(R.id.downloadBtn1)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -92,12 +107,26 @@ public class MainActivity3 extends AppCompatActivity {
                     renderable = modelRenderable;
                 });
     }
-    public void Screenshotbutton(View view) {
-        View view1 = getWindow().getDecorView().getRootView();
-        view1.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(view1.getDrawingCache());
-        view1.setDrawingCacheEnabled(false);
-        handleUpload(bitmap);
+    private void takePhoto(){
+        ArSceneView view = arFragment.getArSceneView();
+
+        final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),view.getHeight(),
+                Bitmap.Config.ARGB_8888);
+
+        final HandlerThread handlerThread = new HandlerThread("PixelCopier");
+        handlerThread.start();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            PixelCopy.request(view, bitmap, (copyResult) -> {
+                if (copyResult == PixelCopy.SUCCESS) {
+                    handleUpload(bitmap);
+                } else {
+                    Toast toast = Toast.makeText(MainActivity3.this, "스크린샷 저장 실패!: " + copyResult, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                handlerThread.quitSafely();
+            }, new Handler(handlerThread.getLooper()));
+        }
     }
     private void handleUpload(Bitmap bitmap){
         String user= FirebaseAuth.getInstance().getCurrentUser().getEmail();
