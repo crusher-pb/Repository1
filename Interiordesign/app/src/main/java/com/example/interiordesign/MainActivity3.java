@@ -54,7 +54,7 @@ public class MainActivity3 extends AppCompatActivity {
         itemno = getIntent().getIntExtra("selected_item",0);
         switch(itemno){
             case 0:
-                fil="artisitschool";
+                fil="artistschool";
                 break;
             case 1:
                 fil="bedroom";
