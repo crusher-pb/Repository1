@@ -25,6 +25,7 @@ import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.assets.RenderableSource;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
+import com.google.ar.sceneform.ux.TransformableNode;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FileDownloadTask;
@@ -41,6 +42,7 @@ import java.util.Calendar;
 public class MainActivity3 extends AppCompatActivity {
 
     ArFragment arFragment;
+    AnchorNode anchorNode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,11 +173,32 @@ public class MainActivity3 extends AppCompatActivity {
                         }
                     }
                 });
+
+        findViewById(R.id.removeBtn)
+                .setOnClickListener( v -> {
+                    try {
+                        File file = File.createTempFile(fil, "glb");
+
+                        modelRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                removeAnchorNode(anchorNode);
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
         arFragment.setOnTapArPlaneListener(((hitResult, plane, motionEvent) -> {
 
-            AnchorNode anchorNode = new AnchorNode(hitResult.createAnchor());
-            anchorNode.setRenderable(renderable);
+            anchorNode = new AnchorNode(hitResult.createAnchor());
+            TransformableNode transformableNode = new TransformableNode(arFragment.getTransformationSystem());
+            transformableNode.setParent(anchorNode);
+            transformableNode.setRenderable(renderable);
+            //anchorNode.setRenderable(renderable);
             arFragment.getArSceneView().getScene().addChild(anchorNode);
+            transformableNode.select();
 
         }));
     }
@@ -228,5 +251,18 @@ public class MainActivity3 extends AppCompatActivity {
                 .child(user)
                 .child(Calendar.getInstance().getTime().toString()+".jpg");
         reference.putBytes(baos.toByteArray());
+    }
+
+    private void removeAnchorNode(AnchorNode nodeToremove) {
+        //Remove an anchor node
+        if (nodeToremove != null) {
+            arFragment.getArSceneView().getScene().removeChild(nodeToremove);
+            nodeToremove.getAnchor().detach();
+            nodeToremove.setParent(null);
+            nodeToremove = null;
+            Toast.makeText(this, "The Object Was Successfully Deleted", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Test Delete - markAnchorNode was null", Toast.LENGTH_SHORT).show();
+        }
     }
 }
