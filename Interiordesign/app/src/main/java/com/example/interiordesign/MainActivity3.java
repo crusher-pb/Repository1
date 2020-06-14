@@ -251,6 +251,7 @@ public class MainActivity3 extends AppCompatActivity {
                 .child(user)
                 .child(Calendar.getInstance().getTime().toString()+".jpg");
         reference.putBytes(baos.toByteArray());
+        Toast.makeText(this,"Screenshot uploaded successfully",Toast.LENGTH_SHORT).show();
     }
 
     private void removeAnchorNode(AnchorNode nodeToremove) {
