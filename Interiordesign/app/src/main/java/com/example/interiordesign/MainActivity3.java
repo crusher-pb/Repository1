@@ -85,16 +85,16 @@ public class MainActivity3 extends AppCompatActivity {
                 fil="tv";
                 break;
             case 11:
-                fil="sleepingbed";
+                fil="sleeepingtable";
                 break;
             case 12:
                 fil="fireplace";
                 break;
             case 13:
-                fil="DeskPC";
+                fil="desk";
                 break;
             case 14:
-                fil="chirthodiachiwaali";
+                fil="chairthodiacchiwaali";
                 break;
             case 15:
                 fil="sideboard1";
@@ -106,13 +106,13 @@ public class MainActivity3 extends AppCompatActivity {
                 fil="jummer";
                 break;
             case 18:
-                fil="dressingtableparttwo";
+                fil="dressingtableparttow";
                 break;
             case 19:
-                fil="yellowarmchair";
+                fil="HUG ARMCHAIR";
                 break;
             case 20:
-                fil="pileswallichair";
+                fil="pileswaalichair";
                 break;
             case 21:
                 fil="sofabitgood";
@@ -124,10 +124,10 @@ public class MainActivity3 extends AppCompatActivity {
                 fil="dinningtablemodel";
                 break;
             case 24:
-                fil="littleslowchair";
+                fil="littlelowchair";
                 break;
             case 25:
-                fil="lowspeeddiningtable";
+                fil="lowspeeddinningtable";
                 break;
             case 26:
                 fil="sideboard";

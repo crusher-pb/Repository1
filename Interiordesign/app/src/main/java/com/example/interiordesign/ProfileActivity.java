@@ -15,6 +15,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 
 public class ProfileActivity extends AppCompatActivity {
     TextView textView;
@@ -30,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         textView=findViewById(R.id.textView5);
-        user=mFirebaseAuth.getCurrentUser().getEmail();
+        user= Objects.requireNonNull(mFirebaseAuth.getCurrentUser()).getEmail();
         String welcomemsg="Welcome "+user;
         textView.setText(welcomemsg);
         rcvListImg=findViewById(R.id.rcv_list_img);
