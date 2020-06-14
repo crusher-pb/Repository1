@@ -236,7 +236,7 @@ public class MainActivity3 extends AppCompatActivity {
                 if (copyResult == PixelCopy.SUCCESS) {
                     handleUpload(bitmap);
                 } else {
-                    Toast toast = Toast.makeText(MainActivity3.this, "스크린샷 저장 실패!: " + copyResult, Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(MainActivity3.this, "Failed to save screenshot !" + copyResult, Toast.LENGTH_LONG);
                     toast.show();
                 }
                 handlerThread.quitSafely();
