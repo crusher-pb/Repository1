@@ -46,7 +46,111 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-
+        String fil;
+        String filename;
+        int itemno;
+        itemno = getIntent().getIntExtra("selected_item",0);
+        switch(itemno){
+            case 0:
+                fil="artisitschool";
+                break;
+            case 1:
+                fil="bedroom";
+                break;
+            case 2:
+                fil="besidetable";
+                break;
+            case 3:
+                fil="chairsingleton";
+                break;
+            case 4:
+                fil="chairsingle";
+                break;
+            case 5:
+                fil="comfycouch";
+                break;
+            case 6:
+                fil="dressingtable";
+                break;
+            case 7:
+                fil="hearth";
+                break;
+            case 8:
+                fil="kitchenTable";
+                break;
+            case 9:
+                fil="sofasingle";
+                break;
+            case 10:
+                fil="tv";
+                break;
+            case 11:
+                fil="sleepingbed";
+                break;
+            case 12:
+                fil="fireplace";
+                break;
+            case 13:
+                fil="DeskPC";
+                break;
+            case 14:
+                fil="chirthodiachiwaali";
+                break;
+            case 15:
+                fil="sideboard1";
+                break;
+            case 16:
+                fil="sofafbxabitgood";
+                break;
+            case 17:
+                fil="jummer";
+                break;
+            case 18:
+                fil="dressingtableparttwo";
+                break;
+            case 19:
+                fil="yellowarmchair";
+                break;
+            case 20:
+                fil="pileswallichair";
+                break;
+            case 21:
+                fil="sofabitgood";
+                break;
+            case 22:
+                fil="shellabitlow";
+                break;
+            case 23:
+                fil="dinningtablemodel";
+                break;
+            case 24:
+                fil="littleslowchair";
+                break;
+            case 25:
+                fil="lowspeeddiningtable";
+                break;
+            case 26:
+                fil="sideboard";
+                break;
+            case 27:
+                fil="jocodinningtable";
+                break;
+            case 28:
+                fil="abcd";
+                break;
+            case 29:
+                fil="NewTod";
+                break;
+            case 30:
+                fil="fileag";
+                break;
+            case 31:
+                fil="out";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + itemno);
+        }
+        filename=fil+".glb";
         findViewById(R.id.savebtn1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +161,7 @@ public class MainActivity3 extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference modelRef = storage.getReference().child("out.glb");
+        StorageReference modelRef = storage.getReference().child(filename);
 
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment1);
         findViewById(R.id.downloadBtn1)
@@ -65,7 +169,7 @@ public class MainActivity3 extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         try {
-                            File file = File.createTempFile("out", "glb");
+                            File file = File.createTempFile(fil, "glb");
 
                             modelRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                 @RequiresApi(api = Build.VERSION_CODES.N)

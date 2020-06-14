@@ -19,14 +19,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.354"
-        app:srcCompat="@drawable/profilecolour" />
+        app:srcCompat="@drawable/profile" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="100dp"
         android:text="profile"
         android:textSize="40dp"
         android:typeface="serif"
@@ -38,7 +37,6 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:text="Welcome "
         android:textSize="30dp"
         android:typeface="serif"

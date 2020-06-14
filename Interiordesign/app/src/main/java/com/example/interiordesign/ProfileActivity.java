@@ -31,7 +31,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         textView=findViewById(R.id.textView5);
         user=mFirebaseAuth.getCurrentUser().getEmail();
-        textView.setText("Welcome "+user);
+        String welcomemsg="Welcome "+user;
+        textView.setText(welcomemsg);
         rcvListImg=findViewById(R.id.rcv_list_img);
         mDataReference = FirebaseDatabase.getInstance().getReference(user);
         imageReference = FirebaseStorage.getInstance().getReference().child(user);

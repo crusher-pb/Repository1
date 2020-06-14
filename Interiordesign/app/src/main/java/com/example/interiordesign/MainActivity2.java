@@ -17,7 +17,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity2 extends AppCompatActivity{
     private RecyclerView recyclerView;
-    private int[] images={R.drawable.i202005150005,R.drawable.i202005150006,R.drawable.i202005150007,R.drawable.i202005150008};
+    private int[] images={R.drawable.i202006140016,R.drawable.i202006140017,R.drawable.i202006140018, R.drawable.i202006140019,
+            R.drawable.i202006140020,R.drawable.i202006140021,R.drawable.i202006140022,R.drawable.i202006140023,R.drawable.i202006140024,
+            R.drawable.i202006140025,R.drawable.i202006140026,R.drawable.i202006140027,R.drawable.i202006140028,R.drawable.i202006140029,
+            R.drawable.i202006140030,R.drawable.i202006140032,R.drawable.i202006140033,R.drawable.i202006140034,R.drawable.i202006140035,
+            R.drawable.i202006140036,R.drawable.i202006140037,R.drawable.i202006140038,R.drawable.i202006140039,R.drawable.i202006140040,
+            R.drawable.i202006140041,R.drawable.i202006140042,R.drawable.i202006140043,R.drawable.i202006140044, R.drawable.i202005150005,
+            R.drawable.i202005150006,R.drawable.i202005150007,R.drawable.i202005150008};
     private RecyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     FirebaseAuth mFirebaseAuth;
