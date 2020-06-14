@@ -54,10 +54,13 @@ public class MainActivity2 extends AppCompatActivity{
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();
         switch (id){
-            case R.id.item1:
+            case R.id.item2:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent=new Intent(MainActivity2.this,MainActivity7.class);
                 startActivity(intent);
+            case R.id.item1:
+                Intent intent1=new Intent(MainActivity2.this,ProfileActivity.class);
+                startActivity(intent1);
         }
         return super.onOptionsItemSelected(item);
     }
