@@ -94,57 +94,45 @@ public class MainActivity3 extends AppCompatActivity {
                 fil="desk";
                 break;
             case 14:
-                fil="chairthodiacchiwaali";
-                break;
-            case 15:
-                fil="sideboard1";
-                break;
-            case 16:
                 fil="sofafbxabitgood";
                 break;
-            case 17:
+            case 15:
                 fil="jummer";
                 break;
-            case 18:
+            case 16:
                 fil="dressingtableparttow";
                 break;
-            case 19:
+            case 17:
                 fil="HUG ARMCHAIR";
                 break;
-            case 20:
-                fil="pileswaalichair";
-                break;
-            case 21:
+            case 18:
                 fil="sofabitgood";
                 break;
-            case 22:
+            case 19:
                 fil="shellabitlow";
                 break;
-            case 23:
+            case 20:
                 fil="dinningtablemodel";
                 break;
-            case 24:
-                fil="littlelowchair";
-                break;
-            case 25:
+            case 21:
                 fil="lowspeeddinningtable";
                 break;
-            case 26:
+            case 22:
                 fil="sideboard";
                 break;
-            case 27:
+            case 23:
                 fil="jocodinningtable";
                 break;
-            case 28:
+            case 24:
                 fil="abcd";
                 break;
-            case 29:
+            case 25:
                 fil="NewTod";
                 break;
-            case 30:
+            case 26:
                 fil="fileag";
                 break;
-            case 31:
+            case 27:
                 fil="out";
                 break;
             default:
