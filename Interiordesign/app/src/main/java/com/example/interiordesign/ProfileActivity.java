@@ -32,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         textView=findViewById(R.id.textView5);
+        mFirebaseAuth=FirebaseAuth.getInstance();
         user= Objects.requireNonNull(mFirebaseAuth.getCurrentUser()).getEmail();
         String welcomemsg="Welcome "+user;
         textView.setText(welcomemsg);
