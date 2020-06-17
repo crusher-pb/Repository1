@@ -42,7 +42,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/ic_close_black_24dp"/>
 
-    <Button
+    <ImageView
         android:id="@+id/flashbtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -50,7 +50,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/ic_flash"/>
+        android:background="@drawable/ic_flash" />
 
 
 </RelativeLayout>

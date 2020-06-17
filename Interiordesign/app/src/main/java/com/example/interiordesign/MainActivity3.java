@@ -3,10 +3,17 @@ package com.example.interiordesign;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +23,8 @@ import android.os.HandlerThread;
 import android.util.Log;
 import android.view.PixelCopy;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +52,10 @@ public class MainActivity3 extends AppCompatActivity {
 
     ArFragment arFragment;
     AnchorNode anchorNode;
+    ImageView flash;
+    private final int code=2;
+    boolean hasCameraFlash=false;
+    private boolean isFlashOn=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,9 +160,16 @@ public class MainActivity3 extends AppCompatActivity {
                 takePhoto();
             }
         });
+        flash=findViewById(R.id.flashbtn);
+        hasCameraFlash=getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+        flash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askPermission(Manifest.permission.CAMERA,code);
+            }
+        });
 
         FirebaseApp.initializeApp(this);
-
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference modelRef = storage.getReference().child(filename);
 
@@ -266,6 +286,53 @@ public class MainActivity3 extends AppCompatActivity {
             Toast.makeText(this, "The Object Was Successfully Deleted", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Test Delete - markAnchorNode was null", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void flashLight(){
+        if(hasCameraFlash){
+            if (isFlashOn){
+                flashLightOff();
+                flash.setImageResource(R.drawable.ic_flash);
+                isFlashOn=false;
+            }
+            else{
+                flashLightOn();
+                flash.setImageResource(R.drawable.ic_flash_off);
+                isFlashOn=true;
+            }
+        }
+        else{
+            Toast.makeText(MainActivity3.this,"No flash available in your device",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void flashLightOn(){
+        CameraManager cameraManager=(CameraManager) getSystemService(Context.CAMERA_SERVICE);
+        try {
+            String cameraId=cameraManager.getCameraIdList()[0];
+            cameraManager.setTorchMode(cameraId,true);
+        }
+        catch (CameraAccessException e){
+        }
+    }
+
+    private void flashLightOff(){
+        CameraManager cameraManager=(CameraManager) getSystemService(Context.CAMERA_SERVICE);
+        try {
+            String cameraId=cameraManager.getCameraIdList()[0];
+            cameraManager.setTorchMode(cameraId,false);
+        }
+        catch (CameraAccessException e){
+        }
+    }
+
+    private void askPermission(String permission,int requestCode){
+        if (ContextCompat.checkSelfPermission(this,permission)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{permission},requestCode);
+        }
+        else{
+            flashLight();
         }
     }
 }

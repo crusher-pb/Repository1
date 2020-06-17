@@ -5,16 +5,15 @@
     android:layout_height="match_parent"
     android:padding="20dp">
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
         android:id="@+id/image_view"/>
     <TextView
-        android:layout_width="120dp"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:id="@+id/textView9"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textSize="20sp"
         android:layout_below="@+id/image_view"/>
-
 </RelativeLayout>

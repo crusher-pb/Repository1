@@ -37,28 +37,27 @@ public class MainActivity2 extends AppCompatActivity{
         recyclerView.setLayoutManager(layoutManager);
         adapter=new RecyclerAdapter(images,this);
         recyclerView.setAdapter(adapter);
-        Toolbar toolbar=(Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.example_menu);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId()==R.id.item1){
+                    Intent intent1=new Intent(MainActivity2.this,ProfileActivity.class);
+                    startActivity(intent1);
+                    return true;
+                }
+                else if (item.getItemId()==R.id.item2){
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent=new Intent(MainActivity2.this,FirstActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.example_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id=item.getItemId();
-        switch (id){
-            case R.id.item2:
-                FirebaseAuth.getInstance().signOut();
-                Intent intent=new Intent(MainActivity2.this,MainActivity7.class);
-                startActivity(intent);
-            case R.id.item1:
-                Intent intent1=new Intent(MainActivity2.this,ProfileActivity.class);
-                startActivity(intent1);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
