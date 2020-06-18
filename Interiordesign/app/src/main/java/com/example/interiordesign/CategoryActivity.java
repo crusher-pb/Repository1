@@ -30,7 +30,10 @@ public class CategoryActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                Intent intent=new Intent(CategoryActivity.this,MainActivity2.class);
+                intent.putExtra("selected_category",position);
+                startActivity(intent);
+                /*switch (position){
                     case 0:
                         startActivity(new Intent(CategoryActivity.this,MainActivity2.class));
                         break;
@@ -48,7 +51,7 @@ public class CategoryActivity extends AppCompatActivity {
                         break;
                     default:
                         Toast.makeText(CategoryActivity.this, "Wrong choice", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
         Toolbar toolbar=findViewById(R.id.toolbar6);

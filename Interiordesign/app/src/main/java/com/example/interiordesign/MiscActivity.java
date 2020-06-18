@@ -13,7 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MiscActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private int[] images={R.drawable.i202006140017,R.drawable.i202006140022,R.drawable.i202006140023,R.drawable.i202006140026,R.drawable.i202006140027,R.drawable.i202006140028,R.drawable.i202006140034};
+    private int[] images={R.drawable.i202006140017,R.drawable.i202006140022,R.drawable.i202006140023,
+            R.drawable.i202006140026,R.drawable.i202006140027,R.drawable.i202006140028,R.drawable.i202006140034};
     private String [] names={"bedroom","dressingtable","hearth","tv","sleeepingtable","fireplace","jummer"};
     private RecyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
