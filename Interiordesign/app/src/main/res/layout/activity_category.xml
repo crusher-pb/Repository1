@@ -6,6 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CategoryActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/toolbar6"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/transparent"/>
 
     <GridView
         android:layout_width="match_parent"
@@ -21,7 +27,7 @@
         android:layout_width="51dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable" />

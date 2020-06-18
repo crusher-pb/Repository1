@@ -13,9 +13,9 @@
         android:layout_height="match_parent" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/downloadBtn1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/savebtn1"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
@@ -23,9 +23,9 @@
         />
 
     <Button
-        android:id="@+id/savebtn1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/downloadBtn1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginStart="50dp"
@@ -42,15 +42,6 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/ic_close_black_24dp"/>
 
-    <ImageView
-        android:id="@+id/flashbtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/ic_flash" />
 
 
 </RelativeLayout>

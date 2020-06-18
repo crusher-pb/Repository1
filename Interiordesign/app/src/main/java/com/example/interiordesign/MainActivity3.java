@@ -12,7 +12,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Camera;
 import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.os.Build;
@@ -52,107 +54,13 @@ public class MainActivity3 extends AppCompatActivity {
 
     ArFragment arFragment;
     AnchorNode anchorNode;
-    ImageView flash;
-    private final int code=2;
-    boolean hasCameraFlash=false;
-    private boolean isFlashOn=false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
         String fil;
         String filename;
-        int itemno;
-        itemno = getIntent().getIntExtra("selected_item",0);
-        switch(itemno){
-            case 0:
-                fil="artistschool";
-                break;
-            case 1:
-                fil="bedroom";
-                break;
-            case 2:
-                fil="besidetable";
-                break;
-            case 3:
-                fil="chairsingleton";
-                break;
-            case 4:
-                fil="chairsingle";
-                break;
-            case 5:
-                fil="comfycouch";
-                break;
-            case 6:
-                fil="dressingtable";
-                break;
-            case 7:
-                fil="hearth";
-                break;
-            case 8:
-                fil="kitchenTable";
-                break;
-            case 9:
-                fil="sofasingle";
-                break;
-            case 10:
-                fil="tv";
-                break;
-            case 11:
-                fil="sleeepingtable";
-                break;
-            case 12:
-                fil="fireplace";
-                break;
-            case 13:
-                fil="desk";
-                break;
-            case 14:
-                fil="sofafbxabitgood";
-                break;
-            case 15:
-                fil="jummer";
-                break;
-            case 16:
-                fil="dressingtableparttow";
-                break;
-            case 17:
-                fil="HUG ARMCHAIR";
-                break;
-            case 18:
-                fil="sofabitgood";
-                break;
-            case 19:
-                fil="shellabitlow";
-                break;
-            case 20:
-                fil="dinningtablemodel";
-                break;
-            case 21:
-                fil="lowspeeddinningtable";
-                break;
-            case 22:
-                fil="sideboard";
-                break;
-            case 23:
-                fil="jocodinningtable";
-                break;
-            case 24:
-                fil="abcd";
-                break;
-            case 25:
-                fil="NewTod";
-                break;
-            case 26:
-                fil="fileag";
-                break;
-            case 27:
-                fil="out";
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + itemno);
-        }
+        fil = getIntent().getStringExtra("selected_item");
         filename=fil+".glb";
         findViewById(R.id.savebtn1).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,15 +68,6 @@ public class MainActivity3 extends AppCompatActivity {
                 takePhoto();
             }
         });
-        flash=findViewById(R.id.flashbtn);
-        hasCameraFlash=getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-        flash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                askPermission(Manifest.permission.CAMERA,code);
-            }
-        });
-
         FirebaseApp.initializeApp(this);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference modelRef = storage.getReference().child(filename);
@@ -180,7 +79,6 @@ public class MainActivity3 extends AppCompatActivity {
                     public void onClick(View v) {
                         try {
                             File file = File.createTempFile(fil, "glb");
-
                             modelRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                 @RequiresApi(api = Build.VERSION_CODES.N)
                                 @Override
@@ -289,50 +187,4 @@ public class MainActivity3 extends AppCompatActivity {
         }
     }
 
-    private void flashLight(){
-        if(hasCameraFlash){
-            if (isFlashOn){
-                flashLightOff();
-                flash.setImageResource(R.drawable.ic_flash);
-                isFlashOn=false;
-            }
-            else{
-                flashLightOn();
-                flash.setImageResource(R.drawable.ic_flash_off);
-                isFlashOn=true;
-            }
-        }
-        else{
-            Toast.makeText(MainActivity3.this,"No flash available in your device",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void flashLightOn(){
-        CameraManager cameraManager=(CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        try {
-            String cameraId=cameraManager.getCameraIdList()[0];
-            cameraManager.setTorchMode(cameraId,true);
-        }
-        catch (CameraAccessException e){
-        }
-    }
-
-    private void flashLightOff(){
-        CameraManager cameraManager=(CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        try {
-            String cameraId=cameraManager.getCameraIdList()[0];
-            cameraManager.setTorchMode(cameraId,false);
-        }
-        catch (CameraAccessException e){
-        }
-    }
-
-    private void askPermission(String permission,int requestCode){
-        if (ContextCompat.checkSelfPermission(this,permission)!=PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{permission},requestCode);
-        }
-        else{
-            flashLight();
-        }
-    }
 }

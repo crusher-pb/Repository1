@@ -1,18 +1,24 @@
 package com.example.interiordesign;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class CategoryActivity extends AppCompatActivity {
 
     GridView gridView;
-    int [] images={R.drawable.insideweatherdbvyvunsplash,R.drawable.tatisubbotaw8vb6kwunsplash,R.drawable.ruslanbardash4kbtunsplash,R.drawable.charlesloyer6fdunsplash};
-    String [] itemnames={"Sofa","Chairs","Tables","Miscellaneous"};
+    int [] images={R.drawable.insideweatherdbvyvunsplash,R.drawable.tatisubbotaw8vb6kwunsplash,R.drawable.ruslanbardash4kbtunsplash,
+            R.drawable.sideboard,R.drawable.charlesloyer6fdunsplash};
+    String [] itemnames={"Sofa","Chairs","Tables","Sideboards","Miscellaneous"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +30,53 @@ public class CategoryActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(CategoryActivity.this,MainActivity2.class));
+                switch (position){
+                    case 0:
+                        startActivity(new Intent(CategoryActivity.this,MainActivity3.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(CategoryActivity.this,ChairActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(CategoryActivity.this,TableActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(CategoryActivity.this,SideboardActivity.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(CategoryActivity.this,MiscActivity.class));
+                        break;
+                    default:
+                        Toast.makeText(CategoryActivity.this, "Wrong choice", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-
+        Toolbar toolbar=findViewById(R.id.toolbar6);
+        toolbar.inflateMenu(R.menu.example_menu);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId()==R.id.item1){
+                    Intent intent1=new Intent(CategoryActivity.this,ProfileActivity.class);
+                    startActivity(intent1);
+                    return true;
+                }
+                else if (item.getItemId()==R.id.item2){
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent=new Intent(CategoryActivity.this,FirstActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+        findViewById(R.id.imageView5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryActivity.super.onBackPressed();
+            }
+        });
     }
 }
