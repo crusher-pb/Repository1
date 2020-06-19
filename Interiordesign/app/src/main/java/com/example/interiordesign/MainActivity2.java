@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -28,18 +29,22 @@ public class MainActivity2 extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         int category=getIntent().getIntExtra("selected_category",0);
+        String cat="";
         switch(category)
         {
             case 0:
+                cat="Sofa";
                 images= new int[]{R.drawable.i202006140019, R.drawable.i202006140021, R.drawable.i202006140025, R.drawable.i202006140038};
                 names= new String[]{"chairsingleton", "comfycouch", "sofasingle", "sofabitgood"};
                 break;
             case 1:
+                cat="Chairs";
                 images= new int[]{R.drawable.i202006140020,R.drawable.i202006140030,R.drawable.i202006180043,R.drawable.i202006180047,
                         R.drawable.i202006180048,R.drawable.i202006180049,R.drawable.i202006180050,R.drawable.i202006180052};
                 names= new String[]{"chairsingle","chairthodiacchiwaali","chair9","chair8","chair4","chair3","chair5","chair7"};
                 break;
             case 2:
+                cat="Tables";
                 images= new int[]{R.drawable.i202006140016,R.drawable.i202006140024,R.drawable.i202006140029,R.drawable.i202006140040,
                         R.drawable.i202006140042,R.drawable.i202006140044,R.drawable.i202006140018,R.drawable.i202006180053,R.drawable.i202006180046,
                         R.drawable.i202006180054,R.drawable.i202006180055,R.drawable.i202006180058};
@@ -47,10 +52,12 @@ public class MainActivity2 extends AppCompatActivity{
                         "table1","table2","table3","table4","Teacher_desk"};
                 break;
             case 3:
+                cat="Sideboards";
                 images= new int[]{R.drawable.i202006140032,R.drawable.i202006140035,R.drawable.i202006140039,R.drawable.i202006180060};
                 names= new String[]{"sideboard","dressingtableparttwo","shellabitlow","misc8"};
                 break;
             case 4:
+                cat="Miscellaneous";
                 images= new int[]{R.drawable.i202006140017,R.drawable.i202006140022,R.drawable.i202006140023, R.drawable.i202006140026,
                         R.drawable.i202006140027,R.drawable.i202006140028,R.drawable.i202006140034,R.drawable.i202006180056,R.drawable.i202006180045,
                         R.drawable.i202006180044,R.drawable.i202006180057,R.drawable.i202006180059,R.drawable.i202006180042,R.drawable.i202006180041,
@@ -60,11 +67,13 @@ public class MainActivity2 extends AppCompatActivity{
                         "misc6","misc7","misc9","misc10","misc11","misc12","misc13","misc14","misc15"};
                 break;
         }
+        TextView textView=findViewById(R.id.textView11);
+        textView.setText(cat);
         recyclerView=findViewById(R.id.recyclerview);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(layoutManager);
-        adapter=new RecyclerAdapter(images,names,this);
+        adapter=new RecyclerAdapter(images,names,cat,this);
         recyclerView.setAdapter(adapter);
         Toolbar toolbar=findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.example_menu);

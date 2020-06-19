@@ -41,7 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
     private StorageReference listRef;
     private ArrayList<String> imageUrls=new ArrayList<>();
     private ArrayList<String> imageNames=new ArrayList<>();
-    private FirebaseRecyclerAdapter<UploadInfo, ImgViewholder> mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

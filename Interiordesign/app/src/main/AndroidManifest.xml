@@ -17,10 +17,6 @@
         android:roundIcon="@drawable/i20200615023829"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MiscActivity"></activity>
-        <activity android:name=".TableActivity" />
-        <activity android:name=".SideboardActivity" />
-        <activity android:name=".ChairActivity" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".FirstActivity" />
         <activity android:name=".MainActivity" />

@@ -33,25 +33,6 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent=new Intent(CategoryActivity.this,MainActivity2.class);
                 intent.putExtra("selected_category",position);
                 startActivity(intent);
-                /*switch (position){
-                    case 0:
-                        startActivity(new Intent(CategoryActivity.this,MainActivity2.class));
-                        break;
-                    case 1:
-                        startActivity(new Intent(CategoryActivity.this,ChairActivity.class));
-                        break;
-                    case 2:
-                        startActivity(new Intent(CategoryActivity.this,TableActivity.class));
-                        break;
-                    case 3:
-                        startActivity(new Intent(CategoryActivity.this,SideboardActivity.class));
-                        break;
-                    case 4:
-                        startActivity(new Intent(CategoryActivity.this,MiscActivity.class));
-                        break;
-                    default:
-                        Toast.makeText(CategoryActivity.this, "Wrong choice", Toast.LENGTH_SHORT).show();
-                }*/
             }
         });
         Toolbar toolbar=findViewById(R.id.toolbar6);

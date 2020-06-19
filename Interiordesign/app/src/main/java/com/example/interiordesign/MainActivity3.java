@@ -119,6 +119,13 @@ public class MainActivity3 extends AppCompatActivity {
             transformableNode.select();
 
         }));
+
+        findViewById(R.id.closeBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity3.super.onBackPressed();
+            }
+        });
     }
     private ModelRenderable renderable ;
 
