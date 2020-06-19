@@ -26,14 +26,5 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:typeface="serif"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/furniture"
-        android:layout_marginLeft="40dp"
-        android:typeface="serif"
-        android:textSize="20dp"
-        android:id="@+id/itemname"/>
 
 </RelativeLayout>
