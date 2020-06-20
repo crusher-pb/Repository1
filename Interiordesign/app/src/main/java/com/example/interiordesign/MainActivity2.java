@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -71,6 +72,12 @@ public class MainActivity2 extends AppCompatActivity{
         }
         TextView textView=findViewById(R.id.textView11);
         textView.setText(cat);
+        findViewById(R.id.imageView8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity2.super.onBackPressed();
+            }
+        });
         recyclerView=findViewById(R.id.recyclerview);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.hasFixedSize();

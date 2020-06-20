@@ -57,6 +57,13 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        Toast.makeText(getApplicationContext(),"This might take a few moments",Toast.LENGTH_SHORT).show();
+        findViewById(R.id.imageView10).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProfileActivity.super.onBackPressed();
+            }
+        });
         profileImageView=findViewById(R.id.profile);
         textView=findViewById(R.id.textView5);
         mFirebaseAuth=FirebaseAuth.getInstance();
